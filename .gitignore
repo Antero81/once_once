@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+<<<<<<< HEAD
+=======
+public/videos/temp_video.mp4
+>>>>>>> 057c227 (feat: Initialize ONCE ONCE project with React)
