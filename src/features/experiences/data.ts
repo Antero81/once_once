@@ -1,3 +1,8 @@
+// Import images for proper bundling
+import downToEarthImg from '../../assets/img/7X0A1092.jpeg';
+import experienceImg from '../../assets/img/Captura de pantalla 2022-07-19 a la(s) 11.00.00 p. m..png';
+import hubsImg from '../../assets/img/Captura de pantalla 2022-07-19 a la(s) 10.57.56 p. m..png';
+
 export interface ExperienceData {
   slug: string;
   id: "down-to-earth" | "experience-design" | "once-once-hubs";
@@ -17,7 +22,7 @@ export const experiences: ExperienceData[] = [
     subtitleKey: "services.items.0.subtitle",
     descriptionKey: "services.items.0.desc",
     targetKey: "services.items.0.target",
-    image: "/assets/img/7X0A1092.jpeg",
+    image: downToEarthImg,
     icon: "map",
   },
   {
@@ -27,7 +32,7 @@ export const experiences: ExperienceData[] = [
     subtitleKey: "services.items.1.subtitle",
     descriptionKey: "services.items.1.desc",
     targetKey: "services.items.1.target",
-    image: "/assets/img/Captura de pantalla 2022-07-19 a la(s) 11.00.00 p. m..png",
+    image: experienceImg,
     icon: "building",
   },
   {
@@ -37,7 +42,7 @@ export const experiences: ExperienceData[] = [
     subtitleKey: "services.items.2.subtitle",
     descriptionKey: "services.items.2.desc",
     targetKey: "services.items.2.target",
-    image: "/assets/img/Captura de pantalla 2022-07-19 a la(s) 10.57.56 p. m..png",
+    image: hubsImg,
     icon: "globe",
   },
 ];
