@@ -380,7 +380,7 @@ export default function App() {
 
   return (
     <GoogleReCaptchaProvider reCaptchaKey={recaptchaKey || ''}>
-      <BrowserRouter>
+      <BrowserRouter basename="/once_once/">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/:slug" element={<ExperiencePage />} />
