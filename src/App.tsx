@@ -18,6 +18,7 @@ import { useHeroDesign } from './hooks/useHeroDesign';
 import { HeroV1 } from './components/HeroV1';
 import { HeroV2 } from './components/HeroV2';
 import { HeroDesignSelector } from './components/HeroDesignSelector';
+import { PhilosophyImage } from './components/PhilosophyImage';
 
 const BusinessCard = ({ title, subtitle, description, target, icon: Icon, image, slug }) => {
   const ref = useRef(null);
@@ -213,12 +214,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-        <div className="relative">
-          <img src={assets.philosophy.sideImage} className="w-full h-[700px] object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-1000" alt="Strategy" />
-          <div className="absolute -bottom-8 -left-8 bg-[#C5A059] p-10 text-black max-w-sm font-serif italic text-2xl shadow-2xl hidden xl:block">
-            "{t.philosophy.quote}"
-          </div>
-        </div>
+        <PhilosophyImage imageUrl={assets.philosophy.sideImage} quote={t.philosophy.quote} />
       </section>
 
       {/* Services Section */}
