@@ -162,7 +162,7 @@ export const ExperiencePage = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
 
         {/* Luxury Glow Effect */}
-        <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-[#C5A059]/10 to-transparent blur-3xl" />
+        <div className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-gradient-to-b from-[#C5A059]/10 to-transparent blur-3xl rounded-full" />
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
