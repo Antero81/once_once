@@ -57,7 +57,7 @@ const BusinessCard = ({ title, subtitle, description, target, icon: Icon, image,
 };
 
 const LandingPage = () => {
-  const [lang, setLang] = useState('es');
+  const [lang, setLang] = useState('en');
   const t = translations[lang];
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { checkRateLimit, recordSubmission, rateLimitError, setRateLimitError } = useRateLimit();
