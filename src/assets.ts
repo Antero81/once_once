@@ -12,7 +12,7 @@ export const assets = {
   hero: {
     // Imagen de respaldo si el video falla
     poster: posterImg,
-    video: "/videos/temp_video.mp4",
+    video: "/assets/temp_video.mp4",
     overlayOpacity: 0.6
   },
   philosophy: {
