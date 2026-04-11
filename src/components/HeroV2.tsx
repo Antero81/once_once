@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { assets } from '../assets';
 
 interface HeroV2Props {
@@ -12,54 +13,35 @@ interface HeroV2Props {
 
 export const HeroV2 = ({ tagline, title, description, locations, cta }: HeroV2Props) => {
   return (
-    <section className="relative h-screen flex items-center justify-center text-center overflow-hidden bg-[#0a0a0a]">
-      {/* Background Image with Parallax */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5 }}
+    <section className="relative h-screen flex items-center overflow-hidden bg-[#0a0a0a]">
+      {/* Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
       >
-        <img
-          src={assets.hero.poster}
-          alt="Hero background"
-          className="w-full h-full object-cover opacity-30"
-        />
-      </motion.div>
+        <source src="/once_once/assets/temp_video.mp4" type="video/mp4" />
+      </video>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-[#0a0a0a]" />
-
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#C5A059]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C5A059]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
 
       {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative z-10 px-4 space-y-8 max-w-4xl"
+        className="relative z-10 px-6 max-w-7xl w-full text-left space-y-8"
       >
-        {/* Tagline with Animated Line */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="flex items-center justify-center gap-4"
-        >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C5A059]" />
-          <h2 className="text-[#C5A059] text-xs uppercase tracking-[0.6em] font-bold">{tagline}</h2>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C5A059]" />
-        </motion.div>
-
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="font-serif text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[1.1]">
+          <h1 className="font-serif text-5xl md:text-7xl font-bold tracking-tight leading-tight max-w-3xl">
             {title}
           </h1>
         </motion.div>
@@ -69,7 +51,7 @@ export const HeroV2 = ({ tagline, title, description, locations, cta }: HeroV2Pr
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-base md:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-base md:text-lg text-gray-300 font-light leading-relaxed max-w-2xl"
         >
           {description}
         </motion.p>
@@ -79,17 +61,20 @@ export const HeroV2 = ({ tagline, title, description, locations, cta }: HeroV2Pr
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="pt-8"
+          className="pt-8 flex flex-col sm:flex-row gap-6"
         >
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-[10px] uppercase tracking-[0.4em] font-bold">
-            <span className="border-b md:border-b-0 md:border-r border-white/20 pb-4 md:pb-0 md:pr-8">{locations}</span>
-            <a
-              href="#ecosystem"
-              className="inline-flex items-center gap-3 px-8 py-4 border border-[#C5A059]/50 hover:border-[#C5A059] hover:bg-[#C5A059]/10 transition-all group"
-            >
-              {cta} <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
-            </a>
-          </div>
+          <Link
+            to="/travel"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#C5A059]/20 border border-[#C5A059] hover:bg-[#C5A059]/30 transition-all group text-[10px] font-bold uppercase tracking-[0.2em] text-white"
+          >
+            Explore Journeys <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+          </Link>
+          <Link
+            to="/studio"
+            className="inline-flex items-center gap-3 px-8 py-4 border border-white/30 hover:border-white/50 transition-all group text-[10px] font-bold uppercase tracking-[0.2em] text-white"
+          >
+            Work With Us <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+          </Link>
         </motion.div>
       </motion.div>
 
