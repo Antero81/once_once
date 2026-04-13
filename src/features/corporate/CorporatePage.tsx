@@ -4,14 +4,15 @@ import { assets } from '@/assets';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mountain, MapPin, Zap, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const CorporatePage = () => {
-  const offerings = [
-    { icon: Mountain, name: 'Corporate Retreats', desc: 'Step away from the everyday. Reconnect, refocus, recharge.' },
-    { icon: MapPin, name: 'Off Sites', desc: 'Where strategy meets scenic. Th bigger picture.' },
-    { icon: Zap, name: 'Incentive Travel', desc: 'Recognize. Reward. Inspire. Unforgettable experiences.' },
-    { icon: Users, name: 'Work in Epic Places', desc: 'Focused work. Inspiring settings. Extraordinary results.' },
-  ];
+  const { t } = useLanguage();
+
+  const offerings = t.corporate.offerings.items.map((item, idx) => {
+    const icons = [Mountain, MapPin, Zap, Users];
+    return { icon: icons[idx], ...item };
+  });
 
   const workCases = [
     { name: 'World Meeting Forum', location: 'Leadership Experience', image: '/once_once/assets/img/_BP_0415.jpeg' },
@@ -34,17 +35,17 @@ export const CorporatePage = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
         <div className="relative z-10 text-left px-6 max-w-7xl w-full">
-          <h1 className="font-serif text-5xl md:text-7xl mb-6">Journeys designed for teams that lead forward</h1>
-          <p className="text-gray-300 text-xl max-w-2xl mb-8">Epic destinations. Real adventure. Lasting impact.</p>
+          <h1 className="font-serif text-5xl md:text-7xl mb-6">{t.corporate.hero.title}</h1>
+          <p className="text-gray-300 text-xl max-w-2xl mb-8">{t.corporate.hero.subtitle}</p>
           <p className="text-gray-400 max-w-2xl">
-            We design corporate experiences that unlock potential, strengthen connections and create memories that stick.
+            {t.corporate.hero.description}
           </p>
         </div>
       </section>
 
       {/* What We Co-Create */}
       <section className="py-32 px-6 max-w-7xl mx-auto bg-[#0f0f0f]">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">What we can co-create together</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.corporate.offerings.title}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {offerings.map((offering, i) => {
             const Icon = offering.icon;
@@ -69,7 +70,7 @@ export const CorporatePage = () => {
 
       {/* Some of Our Work */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">Some of our work</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.corporate.work.title}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
           {workCases.map((project, i) => (
             <motion.div
@@ -96,24 +97,24 @@ export const CorporatePage = () => {
 
       {/* Expect the Extraordinary */}
       <section className="py-32 px-6 max-w-7xl mx-auto bg-[#0f0f0f]">
-        <h2 className="font-serif text-5xl md:text-6xl mb-16">Expect the EXTRA ordinary</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-16">{t.corporate.extra.title}</h2>
         <div className="grid md:grid-cols-3 gap-16">
           <div className="space-y-4">
-            <h3 className="font-serif text-3xl">Real Adventure</h3>
+            <h3 className="font-serif text-3xl">{t.corporate.extra.adventure.title}</h3>
             <p className="text-gray-400 leading-relaxed">
-              Genuine experiences that challenge, inspire and transform teams.
+              {t.corporate.extra.adventure.desc}
             </p>
           </div>
           <div className="space-y-4">
-            <h3 className="font-serif text-3xl">Connection</h3>
+            <h3 className="font-serif text-3xl">{t.corporate.extra.connection.title}</h3>
             <p className="text-gray-400 leading-relaxed">
-              Deep bonds between team members through shared experiences.
+              {t.corporate.extra.connection.desc}
             </p>
           </div>
           <div className="space-y-4">
-            <h3 className="font-serif text-3xl">Not Ordinary</h3>
+            <h3 className="font-serif text-3xl">{t.corporate.extra.notOrdinary.title}</h3>
             <p className="text-gray-400 leading-relaxed">
-              Every detail is designed. Every moment is intentional.
+              {t.corporate.extra.notOrdinary.desc}
             </p>
           </div>
         </div>
@@ -121,16 +122,16 @@ export const CorporatePage = () => {
 
       {/* CTA */}
       <section className="py-16 px-6 max-w-7xl mx-auto text-center space-y-8">
-        <h2 className="font-serif text-4xl">Your next chapter starts here</h2>
+        <h2 className="font-serif text-4xl">{t.corporate.cta.title}</h2>
         <p className="text-gray-400 max-w-2xl mx-auto">
-          Tell us your team's goals and your vision. We'll design an experience that delivers more than you imagined.
+          {t.corporate.cta.description}
         </p>
-        <p className="text-xs text-gray-500 uppercase tracking-widest">Reply within 24 hours</p>
+        <p className="text-xs text-gray-500 uppercase tracking-widest">{t.corporate.cta.note}</p>
         <Link
           to="/contact"
           className="inline-flex items-center gap-3 px-8 py-4 border border-[#C5A059] hover:bg-[#C5A059] text-white hover:text-black transition-all group text-[10px] font-bold uppercase tracking-[0.2em]"
         >
-          Design Your Corporate Journey <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+          {t.corporate.cta.button} <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
         </Link>
       </section>
 

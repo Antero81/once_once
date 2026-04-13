@@ -4,8 +4,11 @@ import { assets } from '@/assets';
 import { motion } from 'framer-motion';
 import { ArrowRight, Pencil, Cog, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const StudioPage = () => {
+  const { t } = useLanguage();
+
   const workCases = [
     { name: 'The Cape', location: 'Los Cabos', image: assets.services.experienceDesign },
     { name: 'El Ganzo', location: 'Los Cabos', image: '/once_once/assets/img/DSC_4141.jpeg' },
@@ -15,11 +18,11 @@ export const StudioPage = () => {
     { name: 'Grupo Presidente', location: 'Mexico', image: '/once_once/assets/img/DSC_7914-38.jpeg' },
   ];
 
-  const process = [
-    { icon: Pencil, name: 'Design', desc: 'We start with a deep understanding of place, of people to create refined concepts with purpose.' },
-    { icon: Cog, name: 'Operate', desc: 'We bring ideas to life with precision, managing every detail to deliver seamless experiences.' },
-    { icon: TrendingUp, name: 'Scale', desc: 'We build lasting systems and partnerships that allow experiences and destinations to grow with impact.' },
-  ];
+  const process = t.studio.howWeWork.steps.map((step, i) => ({
+    icon: [Pencil, Cog, TrendingUp][i],
+    name: step.name,
+    desc: step.desc,
+  }));
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#F5F2ED] font-sans">
@@ -34,26 +37,26 @@ export const StudioPage = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
         <div className="relative z-10 text-left px-6 max-w-7xl w-full">
-          <h1 className="font-serif text-5xl md:text-7xl mb-4">We design how people experience destinations</h1>
-          <p className="text-gray-300 text-lg">Once Once Studio is the creative and operational engine behind every journey, experience and hub we build.</p>
+          <h1 className="font-serif text-5xl md:text-7xl mb-4">{t.studio.hero.title}</h1>
+          <p className="text-gray-300 text-lg">{t.studio.hero.subtitle}</p>
         </div>
       </section>
 
       {/* What We Do */}
       <section className="py-32 px-6 max-w-7xl mx-auto bg-[#0f0f0f]">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">What We Do</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.studio.whatWeDo.title}</h2>
         <div className="grid md:grid-cols-3 gap-12">
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl">Journeys</h3>
-            <p className="text-gray-400">Curated journeys for travelers seeking a deeper connection to each destination.</p>
+            <h3 className="font-serif text-2xl">{t.studio.whatWeDo.journeys.title}</h3>
+            <p className="text-gray-400">{t.studio.whatWeDo.journeys.desc}</p>
           </div>
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl">Experiences</h3>
-            <p className="text-gray-400">Adventure-driven concepts crafted for hotels, resorts and destinations that connect people to place.</p>
+            <h3 className="font-serif text-2xl">{t.studio.whatWeDo.experiences.title}</h3>
+            <p className="text-gray-400">{t.studio.whatWeDo.experiences.desc}</p>
           </div>
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl">Hubs</h3>
-            <p className="text-gray-400">Physical gateways where the brand comes to life and communities connect.</p>
+            <h3 className="font-serif text-2xl">{t.studio.whatWeDo.hubs.title}</h3>
+            <p className="text-gray-400">{t.studio.whatWeDo.hubs.desc}</p>
           </div>
         </div>
       </section>
@@ -61,8 +64,8 @@ export const StudioPage = () => {
       {/* Selected Work */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
         <div className="mb-24">
-          <h2 className="font-serif text-5xl md:text-6xl mb-6">Selected Work</h2>
-          <p className="text-gray-500 uppercase tracking-[0.3em] text-xs font-black">Some of our favorite projects</p>
+          <h2 className="font-serif text-5xl md:text-6xl mb-6">{t.studio.selectedWork.title}</h2>
+          <p className="text-gray-500 uppercase tracking-[0.3em] text-xs font-black">{t.studio.selectedWork.subtitle}</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {workCases.map((project, i) => (
@@ -89,7 +92,7 @@ export const StudioPage = () => {
 
       {/* How We Work */}
       <section className="py-32 px-6 max-w-7xl mx-auto bg-[#0f0f0f]">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">How We Work</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.studio.howWeWork.title}</h2>
         <div className="grid md:grid-cols-3 gap-12">
           {process.map((step, i) => {
             const Icon = step.icon;
@@ -114,15 +117,15 @@ export const StudioPage = () => {
 
       {/* CTA */}
       <section className="py-16 px-6 max-w-7xl mx-auto text-center space-y-8">
-        <h2 className="font-serif text-4xl">Ready to build what's next?</h2>
+        <h2 className="font-serif text-4xl">{t.studio.cta.title}</h2>
         <p className="text-gray-400 max-w-2xl mx-auto">
-          Tell us what you envision. We'll design an experience that delivers more than you imagined.
+          {t.studio.cta.description}
         </p>
         <Link
           to="/contact"
           className="inline-flex items-center gap-3 px-8 py-4 border border-[#C5A059] hover:bg-[#C5A059] text-white hover:text-black transition-all group text-[10px] font-bold uppercase tracking-[0.2em]"
         >
-          Work With Us <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+          {t.studio.cta.button} <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
         </Link>
       </section>
 

@@ -69,6 +69,172 @@ export const translations = {
       },
       footer: "© 2026 Once Once. BCS / BCN / CDMX. Todos los derechos reservados.",
     },
+    about: {
+      hero: {
+        subtitle: "Nuestra Historia",
+        description: "Creamos ecosistemas de aventura que transforman vidas y destinos.",
+      },
+      ourWorld: {
+        title: "Nuestro Mundo",
+        journeys: { title: "Viajes", desc: "Experiencias de aventura premium que conectan con el destino." },
+        experiences: { title: "Experiencias", desc: "Diseño integral de experiencias para propiedades y marcas." },
+        hubs: { title: "Hubs", desc: "Infraestructuras físicas que activan destinos a través de la comunidad." },
+      },
+      founder: {
+        sectionTitle: "Conoce al Founder",
+        p1: "Lorena Dromundo es una atleta de alto rendimiento y arquitecta de experiencias.",
+        p2: "Con más de 15 años en el sector de travel y aventura, ha liderado la creación de ecosistemas que transforman la forma en que las personas exploran el mundo.",
+        quote: "No solo creo experiencias, construyo ecosistemas que cuentan una historia de transformación.",
+        badge1: "Atleta",
+        badge2: "Estratega",
+        badge3: "Visionaria",
+      },
+    },
+    travel: {
+      hero: {
+        title: "Viajes Que Van Más Allá",
+        subtitle: "Creamos viajes que van más allá de la superficie. Conectamos personas con el lugar.",
+      },
+      filterTitle: "Elige Tu Forma de Explorar",
+      filterBy: "Filtrar por Destino",
+      allDestinations: "Todos los Destinos",
+      noResults: "No se encontraron viajes con estos filtros.",
+      cta: {
+        title: "Diseña Tu Propio Viaje",
+        description: "Cuéntanos tus deseos. Tus metas. Y tu visión. Diseñaremos una experiencia que entregue más de lo que imaginaste.",
+        button: "Comenzar Planificación",
+      },
+    },
+    studio: {
+      hero: {
+        title: "Diseñamos Cómo las Personas Experimentan los Destinos",
+        subtitle: "Once Once Studio es el motor creativo y operacional detrás de cada viaje, experiencia y hub.",
+      },
+      whatWeDo: {
+        title: "Qué Hacemos",
+        journeys: { title: "Viajes", desc: "Experiencias de aventura únicas y personalizadas." },
+        experiences: { title: "Experiencias", desc: "Diseño integral de ecosistemas de experiencias." },
+        hubs: { title: "Hubs", desc: "Desarrollo de infraestructuras de aventura." },
+      },
+      selectedWork: {
+        title: "Trabajo Seleccionado",
+        subtitle: "Proyectos que transformaron destinos",
+      },
+      howWeWork: {
+        title: "Cómo Trabajamos",
+        steps: [
+          { name: "Diseño", desc: "Creamos estrategias únicas basadas en tu visión." },
+          { name: "Operación", desc: "Ejecutamos con precisión y atención al detalle." },
+          { name: "Escalabilidad", desc: "Crecemos juntos maximizando el impacto." },
+        ],
+      },
+      cta: {
+        title: "Transformemos Tu Visión",
+        description: "Trabajemos juntos para crear algo extraordinario.",
+        button: "Empezar Proyecto",
+      },
+    },
+    corporate: {
+      hero: {
+        title: "Experiencias Corporativas que Inspiran",
+        subtitle: "Transformamos reuniones en momentos memorables.",
+        description: "Diseñamos y ejecutamos experiencias corporativas que generan conexión genuina y resultados medibles.",
+      },
+      offerings: {
+        title: "Lo Que Ofrecemos",
+        items: [
+          { name: "Liderazgo", desc: "Experiencias que desarrollan líderes." },
+          { name: "Ubicación", desc: "Destinos estratégicos para tu equipo." },
+          { name: "Energía", desc: "Actividades que generan conexión." },
+          { name: "Comunidad", desc: "Espacios para crear vínculos duraderos." },
+        ],
+      },
+      work: { title: "Nuestro Trabajo" },
+      extra: {
+        title: "Espera lo Extraordinario",
+        adventure: { title: "Aventura", desc: "Experiencias que desafían y transforman." },
+        connection: { title: "Conexión", desc: "Momentos genuinos de vínculo humano." },
+        notOrdinary: { title: "Lo Extraordinario", desc: "Resultados que superan expectativas." },
+      },
+      cta: {
+        title: "Diseñemos Juntos",
+        description: "Cuéntanos sobre tu equipo y objetivos. Crearemos una experiencia única.",
+        note: "Nos basamos en México pero servimos a marcas globales.",
+        button: "Empezar Conversación",
+      },
+    },
+    hubs: {
+      hero: {
+        title: "Nuestros Hubs",
+        description: "Espacios donde se crean aventuras y se construyen comunidades.",
+      },
+      ourHubs: {
+        title: "Ecosistemas de Aventura",
+        items: [
+          {
+            subtitle: "Donde todo comenzó",
+            description: "Nuestro primer hogar y HQ creativo. Un lugar que moldeó nuestra visión.",
+          },
+          {
+            subtitle: "Tierra de sabores y historias",
+            description: "Una base para experiencias en el corazón del vino y la cultura.",
+          },
+          {
+            subtitle: "Un nuevo tipo de hub",
+            description: "Un espacio inmersivo que inspira creatividad y conexión.",
+          },
+        ],
+      },
+      partner: {
+        sectionTitle: "Nuestro Partner",
+        description: "Colaboramos con marcas y empresas que comparten nuestra visión.",
+        tagline: "Juntos, Más Fuertes",
+        text: "A través de alianzas estratégicas, expandimos el alcance de nuestro ecosistema.",
+        cta: "Conocer Más",
+      },
+      stats: [
+        { label: "Hubs" },
+        { label: "Destinos" },
+        { label: "Viajeros" },
+        { label: "Conexiones" },
+      ],
+    },
+    contactPage: {
+      hero: {
+        title: "Conectemos",
+        subtitle: "Estamos listos para crear algo extraordinario contigo.",
+      },
+      form: {
+        heading: "Hagamos que tus espacios se sientan. Se vivan. Se recuerden.",
+        subheading: "Cuéntanos sobre ti",
+        typeTravel: { title: "Viajes", desc: "Planifica tu próximo viaje de aventura" },
+        typeBusiness: { title: "Negocios", desc: "Diseña experiencias para tu marca" },
+      },
+      info: {
+        label: "Información Rápida",
+        emailLabel: "Correo",
+        whatsappLabel: "WhatsApp",
+        responseTimeLabel: "Tiempo de Respuesta",
+        responseTime: "Dentro de 24 horas",
+        note: "Estamos basados en México pero servimos a viajeros y marcas globalmente.",
+      },
+      message: {
+        label: "Envíanos un Mensaje",
+        nameLabel: "Tu Nombre",
+        companyLabel: "Nombre de la Empresa",
+        namePlaceholder: "Tu nombre completo",
+        companyPlaceholder: "Nombre de tu empresa",
+        emailLabel: "Correo Electrónico",
+        messageLabel: "Mensaje",
+        travelPlaceholder: "Cuéntanos sobre tu viaje de ensueño...",
+        businessPlaceholder: "Cuéntanos sobre tu visión y objetivos...",
+        button: "Enviar Mensaje",
+      },
+      whatsapp: {
+        label: "¿Prefieres un chat rápido?",
+        button: "Escribir por WhatsApp",
+      },
+    },
     servicePages: {
       "down-to-earth": {
         title: "Down to Earth",
@@ -303,6 +469,172 @@ export const translations = {
         button: "Send Inquiry",
       },
       footer: "© 2026 Once Once. BCS / BCN / CDMX. All rights reserved.",
+    },
+    about: {
+      hero: {
+        subtitle: "Our Story",
+        description: "We create adventure ecosystems that transform lives and destinations.",
+      },
+      ourWorld: {
+        title: "Our World",
+        journeys: { title: "Journeys", desc: "Premium adventure experiences that connect with the destination." },
+        experiences: { title: "Experiences", desc: "Comprehensive experience design for properties and brands." },
+        hubs: { title: "Hubs", desc: "Physical infrastructures that activate destinations through community." },
+      },
+      founder: {
+        sectionTitle: "Meet the Founder",
+        p1: "Lorena Dromundo is a high-performance athlete and experience architect.",
+        p2: "With over 15 years in travel and adventure, she has led the creation of ecosystems that transform how people explore the world.",
+        quote: "I don't just create experiences, I build ecosystems that tell a story of transformation.",
+        badge1: "Athlete",
+        badge2: "Strategist",
+        badge3: "Visionary",
+      },
+    },
+    travel: {
+      hero: {
+        title: "Journeys That Go Deeper",
+        subtitle: "We create journeys that go beyond the surface. We connect people with place.",
+      },
+      filterTitle: "Choose Your Way to Explore",
+      filterBy: "Filter by Destination",
+      allDestinations: "All Destinations",
+      noResults: "No journeys found with these filters.",
+      cta: {
+        title: "Design Your Own Journey",
+        description: "Tell us your desires. Your goals. Your vision. We'll design an experience that delivers beyond imagination.",
+        button: "Start Planning",
+      },
+    },
+    studio: {
+      hero: {
+        title: "We Design How People Experience Destinations",
+        subtitle: "Once Once Studio is the creative and operational engine behind every journey, experience and hub.",
+      },
+      whatWeDo: {
+        title: "What We Do",
+        journeys: { title: "Journeys", desc: "Unique and personalized adventure experiences." },
+        experiences: { title: "Experiences", desc: "Comprehensive design of experience ecosystems." },
+        hubs: { title: "Hubs", desc: "Development of adventure infrastructures." },
+      },
+      selectedWork: {
+        title: "Selected Work",
+        subtitle: "Projects that transformed destinations",
+      },
+      howWeWork: {
+        title: "How We Work",
+        steps: [
+          { name: "Design", desc: "We create unique strategies based on your vision." },
+          { name: "Operations", desc: "We execute with precision and attention to detail." },
+          { name: "Scale", desc: "We grow together maximizing impact." },
+        ],
+      },
+      cta: {
+        title: "Transform Your Vision",
+        description: "Let's work together to create something extraordinary.",
+        button: "Start Project",
+      },
+    },
+    corporate: {
+      hero: {
+        title: "Corporate Experiences That Inspire",
+        subtitle: "We transform meetings into memorable moments.",
+        description: "We design and execute corporate experiences that generate genuine connection and measurable results.",
+      },
+      offerings: {
+        title: "What We Offer",
+        items: [
+          { name: "Leadership", desc: "Experiences that develop leaders." },
+          { name: "Location", desc: "Strategic destinations for your team." },
+          { name: "Energy", desc: "Activities that generate connection." },
+          { name: "Community", desc: "Spaces to create lasting bonds." },
+        ],
+      },
+      work: { title: "Our Work" },
+      extra: {
+        title: "Expect the Extraordinary",
+        adventure: { title: "Adventure", desc: "Experiences that challenge and transform." },
+        connection: { title: "Connection", desc: "Genuine moments of human bonding." },
+        notOrdinary: { title: "The Extraordinary", desc: "Results that exceed expectations." },
+      },
+      cta: {
+        title: "Design Together",
+        description: "Tell us about your team and goals. We'll create a unique experience.",
+        note: "We're based in Mexico but serve global brands.",
+        button: "Start Conversation",
+      },
+    },
+    hubs: {
+      hero: {
+        title: "Our Hubs",
+        description: "Spaces where adventures are created and communities are built.",
+      },
+      ourHubs: {
+        title: "Adventure Ecosystems",
+        items: [
+          {
+            subtitle: "Where it all began",
+            description: "Our first home and creative HQ. A place that shaped our vision.",
+          },
+          {
+            subtitle: "Land of flavors and stories",
+            description: "A base for experiences in the heart of wine and culture.",
+          },
+          {
+            subtitle: "A new kind of hub",
+            description: "An immersive space that inspires creativity and connection.",
+          },
+        ],
+      },
+      partner: {
+        sectionTitle: "Our Partner",
+        description: "We collaborate with brands and companies that share our vision.",
+        tagline: "Together, Stronger",
+        text: "Through strategic partnerships, we expand the reach of our ecosystem.",
+        cta: "Learn More",
+      },
+      stats: [
+        { label: "Hubs" },
+        { label: "Destinations" },
+        { label: "Travelers" },
+        { label: "Connections" },
+      ],
+    },
+    contactPage: {
+      hero: {
+        title: "Let's Connect",
+        subtitle: "We're ready to create something extraordinary with you.",
+      },
+      form: {
+        heading: "Let's make sure your spaces are felt. Shared. Loved. Remembered.",
+        subheading: "Tell us about yourself",
+        typeTravel: { title: "Travel", desc: "Plan your next adventure journey" },
+        typeBusiness: { title: "Business", desc: "Design experiences for your brand" },
+      },
+      info: {
+        label: "Quick Info",
+        emailLabel: "Email",
+        whatsappLabel: "WhatsApp",
+        responseTimeLabel: "Response Time",
+        responseTime: "Within 24 hours",
+        note: "We're based in Mexico but serve travelers and brands globally.",
+      },
+      message: {
+        label: "Send us a Message",
+        nameLabel: "Your Name",
+        companyLabel: "Company Name",
+        namePlaceholder: "Your full name",
+        companyPlaceholder: "Your company name",
+        emailLabel: "Email Address",
+        messageLabel: "Message",
+        travelPlaceholder: "Tell us about your dream journey...",
+        businessPlaceholder: "Tell us about your vision and goals...",
+        button: "Send Message",
+      },
+      whatsapp: {
+        label: "Prefer a quick chat?",
+        button: "Write on WhatsApp",
+      },
     },
     servicePages: {
       "down-to-earth": {

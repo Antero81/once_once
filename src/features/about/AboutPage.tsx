@@ -2,8 +2,11 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { assets } from '@/assets';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const AboutPage = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#F5F2ED] font-sans">
       <Navigation />
@@ -21,36 +24,36 @@ export const AboutPage = () => {
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <h1 className="font-serif text-6xl md:text-8xl mb-8">ONCE ONCE</h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-6">
-            An Adventure Experience Company shaping how people explore the world.
+            {t.about.hero.subtitle}
           </p>
           <p className="text-gray-400 leading-relaxed">
-            We design and operate high-end journeys for travelers, and craft adventure-driven experiences for hotels and destinations, creating more meaningful ways for people to connect with place.
+            {t.about.hero.description}
           </p>
         </div>
       </section>
 
       {/* Our World */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">Our World</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.about.ourWorld.title}</h2>
         <div className="grid md:grid-cols-3 gap-12">
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl">Journeys</h3>
-            <p className="text-gray-400">High-end journeys designed for travelers seeking a deeper connection to each destination.</p>
+            <h3 className="font-serif text-2xl">{t.about.ourWorld.journeys.title}</h3>
+            <p className="text-gray-400">{t.about.ourWorld.journeys.desc}</p>
           </div>
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl">Experiences</h3>
-            <p className="text-gray-400">Adventure-driven concepts crafted for hotels and destinations.</p>
+            <h3 className="font-serif text-2xl">{t.about.ourWorld.experiences.title}</h3>
+            <p className="text-gray-400">{t.about.ourWorld.experiences.desc}</p>
           </div>
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl">Hubs</h3>
-            <p className="text-gray-400">Physical gateways where Once Once comes to life—connecting people to place through experience.</p>
+            <h3 className="font-serif text-2xl">{t.about.ourWorld.hubs.title}</h3>
+            <p className="text-gray-400">{t.about.ourWorld.hubs.desc}</p>
           </div>
         </div>
       </section>
 
       {/* Founder */}
       <section className="py-32 px-6 max-w-7xl mx-auto bg-[#0f0f0f]">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">Founder</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.about.founder.sectionTitle}</h2>
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <img
             src="/once_once/assets/img/DSC04801.png"
@@ -60,23 +63,23 @@ export const AboutPage = () => {
           <div className="space-y-8">
             <h3 className="font-serif text-4xl">Lorena Dromundo</h3>
             <p className="text-gray-400 leading-relaxed">
-              Former professional downhill rider and 3x Pan American champion, now bringing the mindset of high performance into the world of business.
+              {t.about.founder.p1}
             </p>
             <p className="text-gray-400 leading-relaxed">
-              As an Adventure Experience Architect, she creates journeys defined by movement, culture, and a deep connection to place—designed to be felt from within.
+              {t.about.founder.p2}
             </p>
             <blockquote className="border-l-2 border-[#C5A059] pl-6 italic text-gray-300">
-              "Adventure is not just something to do — it's a way to experience a place and understand it from within."
+              "{t.about.founder.quote}"
             </blockquote>
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
               <div>
-                <p className="text-[#C5A059] font-bold text-sm mb-2">Former Pro Downhill Rider</p>
+                <p className="text-[#C5A059] font-bold text-sm mb-2">{t.about.founder.badge1}</p>
               </div>
               <div>
-                <p className="text-[#C5A059] font-bold text-sm mb-2">3x Pan American Champion</p>
+                <p className="text-[#C5A059] font-bold text-sm mb-2">{t.about.founder.badge2}</p>
               </div>
               <div>
-                <p className="text-[#C5A059] font-bold text-sm mb-2">Adventure Experience Architect</p>
+                <p className="text-[#C5A059] font-bold text-sm mb-2">{t.about.founder.badge3}</p>
               </div>
             </div>
           </div>

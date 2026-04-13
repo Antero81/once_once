@@ -6,8 +6,10 @@ import { useState } from 'react';
 import { journeys, getUniqueTypes, getUniqueDestinations, Journey } from './data/journeys';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const TravelPage = () => {
+  const { t } = useLanguage();
   const [selectedType, setSelectedType] = useState<Journey['type'] | 'all'>('all');
   const [selectedDestination, setSelectedDestination] = useState<string>('all');
 
@@ -33,15 +35,15 @@ export const TravelPage = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
         <div className="relative z-10 text-left px-6 max-w-7xl w-full">
-          <h1 className="font-serif text-5xl md:text-7xl mb-4">Journeys that go beyond the surface</h1>
-          <p className="text-gray-300 text-lg max-w-2xl">We create journeys that go beyond the surface. We connect people with place.</p>
+          <h1 className="font-serif text-5xl md:text-7xl mb-4">{t.travel.hero.title}</h1>
+          <p className="text-gray-300 text-lg max-w-2xl">{t.travel.hero.subtitle}</p>
         </div>
       </section>
 
       {/* Categories */}
       <section className="py-16 px-6 bg-[#0f0f0f] border-b border-white/5">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-8 font-bold">Choose Your Way to Explore</h3>
+          <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-8 font-bold">{t.travel.filterTitle}</h3>
           <div className="flex flex-wrap gap-4">
             <button
               onClick={() => setSelectedType('all')}
@@ -73,7 +75,7 @@ export const TravelPage = () => {
       {/* Destinations Filter */}
       <section className="py-16 px-6 border-b border-white/5">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-8 font-bold">Filter by Destination</h3>
+          <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-8 font-bold">{t.travel.filterBy}</h3>
           <div className="flex flex-wrap gap-4">
             <button
               onClick={() => setSelectedDestination('all')}
@@ -83,7 +85,7 @@ export const TravelPage = () => {
                   : 'border-white/20 hover:border-[#C5A059] text-white'
               }`}
             >
-              All Destinations
+              {t.travel.allDestinations}
             </button>
             {destinations.map((dest) => (
               <button
@@ -106,7 +108,7 @@ export const TravelPage = () => {
       <section className="py-32 px-6 max-w-7xl mx-auto">
         {filtered.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">No journeys found with those filters.</p>
+            <p className="text-gray-500 text-lg">{t.travel.noResults}</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -143,15 +145,15 @@ export const TravelPage = () => {
       {/* Private CTA */}
       <section className="py-16 px-6 bg-[#0f0f0f] border-t border-white/5">
         <div className="max-w-7xl mx-auto text-center space-y-8">
-          <h2 className="font-serif text-4xl md:text-5xl">Design Your Own Journey</h2>
+          <h2 className="font-serif text-4xl md:text-5xl">{t.travel.cta.title}</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Tell us your desires. Your goals. And your vision. We'll design an experience that delivers more than you imagined.
+            {t.travel.cta.description}
           </p>
           <Link
             to="/contact"
             className="inline-flex items-center gap-3 px-8 py-4 border border-[#C5A059] hover:bg-[#C5A059] text-white hover:text-black transition-all group text-[10px] font-bold uppercase tracking-[0.2em]"
           >
-            Start Planning <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+            {t.travel.cta.button} <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
           </Link>
         </div>
       </section>

@@ -5,8 +5,10 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { getWhatsAppLink } from '@/config/contact';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const ContactPage = () => {
+  const { t } = useLanguage();
   const [contactType, setContactType] = useState<'travel' | 'business'>('travel');
 
   return (
@@ -22,8 +24,8 @@ export const ContactPage = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
         <div className="relative z-10 text-left px-6 max-w-7xl w-full">
-          <h1 className="font-serif text-5xl md:text-7xl mb-4">Let's Build What's Next</h1>
-          <p className="text-gray-300 text-lg">Reach out. We'll get back to you within 24 hours.</p>
+          <h1 className="font-serif text-5xl md:text-7xl mb-4">{t.contactPage.hero.title}</h1>
+          <p className="text-gray-300 text-lg">{t.contactPage.hero.subtitle}</p>
         </div>
       </section>
 
@@ -32,8 +34,8 @@ export const ContactPage = () => {
         <div className="grid md:grid-cols-2 gap-16 mb-32">
           {/* Type Selection */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
-            <h2 className="font-serif text-4xl md:text-5xl mb-8">How can we help?</h2>
-            <p className="text-gray-400 mb-12">Choose your path to explore deeper.</p>
+            <h2 className="font-serif text-4xl md:text-5xl mb-8">{t.contactPage.form.heading}</h2>
+            <p className="text-gray-400 mb-12">{t.contactPage.form.subheading}</p>
             <div className="space-y-4">
               <button
                 onClick={() => setContactType('travel')}
@@ -43,8 +45,8 @@ export const ContactPage = () => {
                     : 'border-white/10 hover:border-white/20'
                 }`}
               >
-                <h3 className="font-serif text-2xl mb-2">Travel</h3>
-                <p className="text-gray-400 text-sm">Plan your next adventure journey</p>
+                <h3 className="font-serif text-2xl mb-2">{t.contactPage.form.typeTravel.title}</h3>
+                <p className="text-gray-400 text-sm">{t.contactPage.form.typeTravel.desc}</p>
               </button>
               <button
                 onClick={() => setContactType('business')}
@@ -54,24 +56,24 @@ export const ContactPage = () => {
                     : 'border-white/10 hover:border-white/20'
                 }`}
               >
-                <h3 className="font-serif text-2xl mb-2">Business & Partnerships</h3>
-                <p className="text-gray-400 text-sm">Design experiences for your brand</p>
+                <h3 className="font-serif text-2xl mb-2">{t.contactPage.form.typeBusiness.title}</h3>
+                <p className="text-gray-400 text-sm">{t.contactPage.form.typeBusiness.desc}</p>
               </button>
             </div>
           </motion.div>
 
           {/* Details */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-            <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-4 font-bold">Quick Info</h3>
+            <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-4 font-bold">{t.contactPage.info.label}</h3>
             <div className="space-y-8">
               <div>
-                <p className="text-gray-500 text-sm uppercase tracking-widest mb-2">Email</p>
+                <p className="text-gray-500 text-sm uppercase tracking-widest mb-2">{t.contactPage.info.emailLabel}</p>
                 <a href="mailto:contacto@onceonce.com" className="text-white hover:text-[#C5A059] transition-colors">
                   contacto@onceonce.com
                 </a>
               </div>
               <div>
-                <p className="text-gray-500 text-sm uppercase tracking-widest mb-2">WhatsApp</p>
+                <p className="text-gray-500 text-sm uppercase tracking-widest mb-2">{t.contactPage.info.whatsappLabel}</p>
                 <a
                   href={getWhatsAppLink()}
                   target="_blank"
@@ -83,12 +85,12 @@ export const ContactPage = () => {
                 </a>
               </div>
               <div>
-                <p className="text-gray-500 text-sm uppercase tracking-widest mb-2">Response Time</p>
-                <p className="text-white">Within 24 hours</p>
+                <p className="text-gray-500 text-sm uppercase tracking-widest mb-2">{t.contactPage.info.responseTimeLabel}</p>
+                <p className="text-white">{t.contactPage.info.responseTime}</p>
               </div>
               <div className="pt-8 border-t border-white/10">
                 <p className="text-gray-500 text-xs leading-relaxed">
-                  We're based in Mexico but serve travelers and brands globally. Let's connect and create something extraordinary together.
+                  {t.contactPage.info.note}
                 </p>
               </div>
             </div>
@@ -97,20 +99,20 @@ export const ContactPage = () => {
 
         {/* Full Width Message */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="max-w-3xl">
-          <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-4 font-bold">Send us a message</h3>
+          <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-4 font-bold">{t.contactPage.message.label}</h3>
           <div className="space-y-6">
             <div>
               <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">
-                {contactType === 'travel' ? 'Your Name' : 'Company Name'}
+                {contactType === 'travel' ? t.contactPage.message.nameLabel : t.contactPage.message.companyLabel}
               </label>
               <input
                 type="text"
-                placeholder={contactType === 'travel' ? 'Your Name' : 'Your Company'}
+                placeholder={contactType === 'travel' ? t.contactPage.message.namePlaceholder : t.contactPage.message.companyPlaceholder}
                 className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-[#C5A059] transition-colors placeholder-gray-600"
               />
             </div>
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">Email</label>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">{t.contactPage.message.emailLabel}</label>
               <input
                 type="email"
                 placeholder="your@email.com"
@@ -118,19 +120,19 @@ export const ContactPage = () => {
               />
             </div>
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">Message</label>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">{t.contactPage.message.messageLabel}</label>
               <textarea
                 placeholder={
                   contactType === 'travel'
-                    ? 'Tell us about your dream journey...'
-                    : 'Tell us about your vision and goals...'
+                    ? t.contactPage.message.travelPlaceholder
+                    : t.contactPage.message.businessPlaceholder
                 }
                 rows={6}
                 className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-[#C5A059] transition-colors placeholder-gray-600 resize-none"
               />
             </div>
             <button className="w-full py-6 bg-[#C5A059] text-black font-bold uppercase tracking-[0.4em] hover:bg-white transition-all">
-              Send Message
+              {t.contactPage.message.button}
             </button>
           </div>
         </motion.div>
@@ -138,7 +140,7 @@ export const ContactPage = () => {
 
       {/* Alternative: WhatsApp CTA */}
       <section className="py-16 px-6 max-w-7xl mx-auto bg-[#0f0f0f] rounded-lg text-center space-y-6 mb-32">
-        <p className="text-gray-400">Prefer a quick chat?</p>
+        <p className="text-gray-400">{t.contactPage.whatsapp.label}</p>
         <a
           href={getWhatsAppLink()}
           target="_blank"
@@ -146,7 +148,7 @@ export const ContactPage = () => {
           className="inline-flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white hover:bg-[#20ba5e] transition-all font-bold text-[10px] uppercase tracking-[0.2em] rounded-lg"
         >
           <MessageCircle size={20} />
-          Message us on WhatsApp
+          {t.contactPage.whatsapp.button}
         </a>
       </section>
 

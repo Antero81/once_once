@@ -3,36 +3,23 @@ import { Footer } from '@/components/layout/Footer';
 import { assets } from '@/assets';
 import { motion } from 'framer-motion';
 import { Bike, Mountain, Compass, Heart } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const HubsPage = () => {
-  const hubs = [
-    {
-      name: 'Los Cabos',
-      subtitle: 'Where it all began',
-      description: 'Our first home and creative HQ. A place that shaped our vision and continues our journey well-built.',
-      tags: ['HQ', 'Community', 'Adventure'],
-      image: assets.services.hubs,
-    },
-    {
-      name: 'Valle de Guadalupe',
-      subtitle: 'Land of flavors. Land of stories.',
-      description: 'A base for experiences. Hubs where country rhythms, wine country cycles, culture and connection.',
-      tags: ['Wine', 'Nature', 'Culture'],
-      image: '/once_once/assets/img/_DSC5511.jpeg',
-    },
-    {
-      name: 'MUSA',
-      subtitle: 'A new kind of hub',
-      description: 'An immersive space being built to spark creativity, movement and meaningful experiences. More to come.',
-      tags: ['Creativity', 'Wellness', 'Connection'],
-      image: '/once_once/assets/img/DSC05054.jpeg',
-    },
-  ];
+  const { t } = useLanguage();
+
+  const hubs = t.hubs.ourHubs.items.map((item, i) => ({
+    name: ['Los Cabos', 'Valle de Guadalupe', 'MUSA'][i],
+    subtitle: item.subtitle,
+    description: item.description,
+    tags: [['HQ', 'Community', 'Adventure'], ['Wine', 'Nature', 'Culture'], ['Creativity', 'Wellness', 'Connection']][i],
+    image: [assets.services.hubs, '/once_once/assets/img/_DSC5511.jpeg', '/once_once/assets/img/DSC05054.jpeg'][i],
+  }));
 
   const partner = {
     name: 'The Ride Co.',
     location: 'Tijuana, Mexico',
-    description: 'Our certified partner in Tijuana. The Ride Co. shares our DNA of adventure, quality and community. Together we create more opportunities to explore.',
+    description: t.hubs.partner.description,
     tags: ['Bikes', 'Gear', 'Community'],
     image: '/once_once/assets/img/DSC_7914-38.jpeg',
   };
@@ -50,16 +37,16 @@ export const HubsPage = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
         <div className="relative z-10 text-left px-6 max-w-7xl w-full">
-          <h1 className="font-serif text-5xl md:text-7xl mb-6">Physical gateways. Deeper connections.</h1>
+          <h1 className="font-serif text-5xl md:text-7xl mb-6">{t.hubs.hero.title}</h1>
           <p className="text-gray-300 text-xl max-w-2xl">
-            Where adventure, community and place come to life. Each hub is a home base for exploration, connection and unforgettable experiences.
+            {t.hubs.hero.description}
           </p>
         </div>
       </section>
 
       {/* Our Hubs */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">Our Hubs</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.hubs.ourHubs.title}</h2>
         <div className="grid md:grid-cols-3 gap-12">
           {hubs.map((hub, i) => (
             <motion.div
@@ -101,7 +88,7 @@ export const HubsPage = () => {
 
       {/* Our Partner */}
       <section className="py-32 px-6 max-w-7xl mx-auto bg-[#0f0f0f]">
-        <h2 className="font-serif text-5xl md:text-6xl mb-24">Our Partner</h2>
+        <h2 className="font-serif text-5xl md:text-6xl mb-24">{t.hubs.partner.sectionTitle}</h2>
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -121,9 +108,9 @@ export const HubsPage = () => {
             </div>
             <p className="text-gray-400 leading-relaxed text-lg">{partner.description}</p>
             <div className="space-y-4">
-              <p className="text-[#C5A059] font-bold text-sm uppercase tracking-widest">Stronger together</p>
+              <p className="text-[#C5A059] font-bold text-sm uppercase tracking-widest">{t.hubs.partner.tagline}</p>
               <p className="text-gray-400 leading-relaxed">
-                We partner with like-minded brands that share our passion for movement, community and pushing boundaries.
+                {t.hubs.partner.text}
               </p>
             </div>
             <div className="flex gap-2 flex-wrap pt-4">
@@ -142,7 +129,7 @@ export const HubsPage = () => {
               rel="noopener noreferrer"
               className="inline-block px-6 py-3 border border-[#C5A059] hover:bg-[#C5A059] text-white hover:text-black transition-all text-[10px] font-bold uppercase tracking-[0.2em]"
             >
-              Learn More About The Ride Co.
+              {t.hubs.partner.cta}
             </a>
           </div>
         </div>
@@ -153,19 +140,19 @@ export const HubsPage = () => {
         <div className="grid md:grid-cols-4 gap-12 text-center">
           <div>
             <p className="font-serif text-4xl md:text-5xl text-[#C5A059] mb-2">3</p>
-            <p className="text-gray-500 uppercase text-xs tracking-widest">Hubs & Growing</p>
+            <p className="text-gray-500 uppercase text-xs tracking-widest">{t.hubs.stats[0].label}</p>
           </div>
           <div>
             <p className="font-serif text-4xl md:text-5xl text-[#C5A059] mb-2">25+</p>
-            <p className="text-gray-500 uppercase text-xs tracking-widest">Destinations Explored</p>
+            <p className="text-gray-500 uppercase text-xs tracking-widest">{t.hubs.stats[1].label}</p>
           </div>
           <div>
             <p className="font-serif text-4xl md:text-5xl text-[#C5A059] mb-2">5K+</p>
-            <p className="text-gray-500 uppercase text-xs tracking-widest">Travelers Impacted</p>
+            <p className="text-gray-500 uppercase text-xs tracking-widest">{t.hubs.stats[2].label}</p>
           </div>
           <div>
             <p className="font-serif text-4xl md:text-5xl text-[#C5A059] mb-2">∞</p>
-            <p className="text-gray-500 uppercase text-xs tracking-widest">Connections Made</p>
+            <p className="text-gray-500 uppercase text-xs tracking-widest">{t.hubs.stats[3].label}</p>
           </div>
         </div>
       </section>
