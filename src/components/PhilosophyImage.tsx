@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionTemplate } from 'motion/react';
 import { useRef } from 'react';
 
 interface PhilosophyImageProps {
@@ -26,7 +26,7 @@ export const PhilosophyImage = ({ imageUrl, quote }: PhilosophyImageProps) => {
           filter: filterStyle
         }}
         className="w-full h-[700px] object-cover"
-        alt="Strategy"
+        alt="Philosophy and strategy imagery with grayscale animation effect"
       />
       <div className="absolute -bottom-8 -left-8 bg-[#C5A059] p-10 text-black max-w-sm font-serif italic text-2xl shadow-2xl hidden xl:block">
         "{quote}"

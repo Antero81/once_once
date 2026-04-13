@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { assets } from '../assets';
@@ -20,6 +20,8 @@ export const HeroV2 = ({ tagline, title, description, locations, cta }: HeroV2Pr
         muted
         loop
         playsInline
+        poster={assets.hero.poster}
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover opacity-70"
       >
         <source src="/once_once/assets/temp_video.mp4" type="video/mp4" />
