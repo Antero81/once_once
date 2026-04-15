@@ -2,9 +2,168 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { assets } from '@/assets';
 import { motion } from 'motion/react';
-import { ArrowRight, Pencil, Cog, TrendingUp } from 'lucide-react';
+import { ArrowRight, Pencil, Cog, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useState } from 'react';
+
+interface WorkProject {
+  name: string;
+  location: string;
+  image: string;
+}
+
+interface SelectionWorkProps {
+  workCases: WorkProject[];
+  t: any;
+}
+
+const SelectionWork = ({ workCases, t }: SelectionWorkProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(workCases.length / itemsPerPage);
+  const currentItems = workCases.slice(activeIndex * itemsPerPage, (activeIndex + 1) * itemsPerPage);
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % totalPages);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  return (
+    <section className="relative py-40 px-6 min-h-[600px] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a]">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0 opacity-20">
+        <img
+          src={currentItems[0]?.image || assets.services.experienceDesign}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
+      </div>
+
+      {/* Title overlay */}
+      <motion.div
+        key={activeIndex}
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+      >
+        <h2 className="font-serif text-[160px] md:text-[200px] lg:text-[240px] leading-none font-black text-white/5 text-center">
+          {t.studio.selectedWork.title}
+        </h2>
+      </motion.div>
+
+      {/* Content wrapper */}
+      <div className="relative z-10 max-w-7xl w-full">
+        {/* Header */}
+        <div className="mb-20 text-center">
+          <p className="text-[#C5A059] text-xs uppercase tracking-[0.3em] font-bold mb-4">
+            {t.studio.selectedWork.subtitle}
+          </p>
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {currentItems.map((project, i) => (
+            <motion.div
+              key={project.name}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="group relative h-[480px] rounded-lg overflow-hidden cursor-pointer"
+            >
+              {/* Location badge */}
+              <div className="absolute top-4 left-4 z-20">
+                <span className="bg-[#C5A059] text-black text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">
+                  {project.location}
+                </span>
+              </div>
+
+              {/* Image */}
+              <img
+                src={project.image}
+                alt={project.name}
+                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+              {/* Title at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                <h3 className="font-serif text-2xl md:text-3xl text-white font-bold leading-tight">
+                  {project.name}
+                </h3>
+              </div>
+
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#C5A059]/5" />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Navigation controls */}
+        <div className="flex items-center justify-between">
+          {/* Left arrow */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handlePrev}
+            className="w-12 h-12 rounded-full bg-[#C5A059]/10 border border-[#C5A059]/50 hover:border-[#C5A059] flex items-center justify-center text-[#C5A059] transition-all group"
+          >
+            <ChevronLeft size={24} className="group-hover:translate-x-0.5 transition-transform" />
+          </motion.button>
+
+          {/* Page indicators */}
+          <div className="flex items-center gap-3">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <motion.button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                animate={{
+                  width: activeIndex === i ? 32 : 12,
+                  backgroundColor: activeIndex === i ? '#C5A059' : 'rgba(197, 160, 89, 0.3)',
+                }}
+                transition={{ duration: 0.3 }}
+                className="h-2 rounded-full"
+              />
+            ))}
+          </div>
+
+          {/* Right arrow */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleNext}
+            className="w-12 h-12 rounded-full bg-[#C5A059]/10 border border-[#C5A059]/50 hover:border-[#C5A059] flex items-center justify-center text-[#C5A059] transition-all group"
+          >
+            <ChevronRight size={24} className="group-hover:-translate-x-0.5 transition-transform" />
+          </motion.button>
+        </div>
+      </div>
+
+      {/* CTA button */}
+      <motion.div
+        className="relative z-10 mt-24"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <Link
+          to="/contact"
+          className="inline-flex items-center gap-3 px-8 py-4 border border-[#C5A059] hover:bg-[#C5A059] text-white hover:text-black transition-all group text-[10px] font-bold uppercase tracking-[0.2em]"
+        >
+          {t.studio.cta.button || 'Get Started'} <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+        </Link>
+      </motion.div>
+    </section>
+  );
+};
 
 export const StudioPage = () => {
   const { t } = useLanguage();
@@ -61,35 +220,8 @@ export const StudioPage = () => {
         </div>
       </section>
 
-      {/* Selected Work */}
-      <section className="py-32 px-6 max-w-7xl mx-auto">
-        <div className="mb-24">
-          <h2 className="font-serif text-5xl md:text-6xl mb-6">{t.studio.selectedWork.title}</h2>
-          <p className="text-gray-500 uppercase tracking-[0.3em] text-xs font-black">{t.studio.selectedWork.subtitle}</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {workCases.map((project, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="relative h-64 overflow-hidden rounded-lg group cursor-pointer"
-            >
-              <img
-                src={project.image}
-                alt={project.name}
-                loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="font-serif text-xl mb-1">{project.name}</h3>
-                <p className="text-gray-300 text-xs uppercase tracking-widest">{project.location}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* Selected Work — Editorial Showcase */}
+      <SelectionWork workCases={workCases} t={t} />
 
       {/* How We Work */}
       <section className="py-32 px-6 max-w-7xl mx-auto bg-[#0f0f0f]">
