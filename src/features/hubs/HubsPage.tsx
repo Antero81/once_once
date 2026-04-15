@@ -125,14 +125,6 @@ export const HubsPage = () => {
                 </span>
               ))}
             </div>
-            <a
-              href="https://theridecompany.mx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-6 py-3 border border-[#C5A059] hover:bg-[#C5A059] text-white hover:text-black transition-all text-[10px] font-bold uppercase tracking-[0.2em]"
-            >
-              {t.hubs.partner.cta}
-            </a>
           </div>
         </div>
       </section>
