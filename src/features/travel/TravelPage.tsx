@@ -1,9 +1,11 @@
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { assets } from '@/assets';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 import { journeys, getUniqueTypes, getUniqueDestinations, Journey } from './data/journeys';
+import { getGalleryById } from './data/galleries';
+import { GalleryModal } from './components/GalleryModal';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -12,6 +14,9 @@ export const TravelPage = () => {
   const { t } = useLanguage();
   const [selectedType, setSelectedType] = useState<Journey['type'] | 'all'>('all');
   const [selectedDestination, setSelectedDestination] = useState<string>('all');
+  const [activeGalleryJourney, setActiveGalleryJourney] = useState<Journey | null>(null);
+
+  const activeGallery = activeGalleryJourney ? getGalleryById(activeGalleryJourney.id) : undefined;
 
   const filtered = journeys.filter((j) => {
     const typeMatch = selectedType === 'all' || j.type === selectedType;
@@ -121,6 +126,7 @@ export const TravelPage = () => {
                 key={journey.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                onClick={() => setActiveGalleryJourney(journey)}
                 className="group relative overflow-hidden rounded-lg cursor-pointer"
               >
                 <div className="relative h-80 overflow-hidden">
@@ -164,6 +170,17 @@ export const TravelPage = () => {
       </section>
 
       <Footer />
+
+      {/* Gallery Modal */}
+      <AnimatePresence>
+        {activeGalleryJourney && activeGallery && (
+          <GalleryModal
+            journey={activeGalleryJourney}
+            gallery={activeGallery}
+            onClose={() => setActiveGalleryJourney(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* WhatsApp Button */}
       <a
