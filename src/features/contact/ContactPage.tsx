@@ -3,13 +3,89 @@ import { Footer } from '@/components/layout/Footer';
 import { assets } from '@/assets';
 import { motion } from 'motion/react';
 import { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Loader } from 'lucide-react';
 import { getWhatsAppLink } from '@/config/contact';
 import { useLanguage } from '@/hooks/useLanguage';
+import { sendContactEmail } from '@/services/email';
+import { ContactFormSchema } from '@/config/validation';
+import { useRateLimit } from '@/hooks/useRateLimit';
+
+interface FormState {
+  status: 'idle' | 'sending' | 'success' | 'error';
+  message?: string;
+}
 
 export const ContactPage = () => {
   const { t } = useLanguage();
   const [contactType, setContactType] = useState<'travel' | 'business'>('travel');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [formState, setFormState] = useState<FormState>({ status: 'idle' });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const { checkRateLimit, recordSubmission, rateLimitError, setRateLimitError } = useRateLimit();
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error for this field when user starts typing
+    if (formErrors[name]) {
+      setFormErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormErrors({});
+    setRateLimitError('');
+
+    // Check rate limit
+    const rateLimitCheck = checkRateLimit();
+    if (!rateLimitCheck.allowed) {
+      setFormErrors({ form: rateLimitError });
+      return;
+    }
+
+    // Validate form data
+    const validation = ContactFormSchema.safeParse(formData);
+    if (!validation.success) {
+      const errors: Record<string, string> = {};
+      validation.error.issues.forEach((issue: any) => {
+        const field = String(issue.path[0]);
+        errors[field] = issue.message;
+      });
+      setFormErrors(errors);
+      return;
+    }
+
+    setFormState({ status: 'sending' });
+
+    try {
+      await sendContactEmail({
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        contact_type: contactType,
+      });
+
+      setFormState({
+        status: 'success',
+        message: t.contactPage.message.successMessage || (contactType === 'travel' ? '¡Consulta enviada!' : '¡Propuesta recibida!'),
+      });
+      setFormData({ name: '', email: '', message: '' });
+      recordSubmission();
+      setTimeout(() => setFormState({ status: 'idle' }), 4000);
+    } catch (error) {
+      console.error('[CONTACT_FORM_ERROR]', error instanceof Error ? error.message : 'Unknown error');
+      setFormState({
+        status: 'error',
+        message: t.contactPage.message.errorMessage || 'Error al enviar. Intenta con WhatsApp.',
+      });
+      setTimeout(() => setFormState({ status: 'idle' }), 4000);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#F5F2ED] font-sans">
@@ -100,41 +176,106 @@ export const ContactPage = () => {
         {/* Full Width Message */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="max-w-3xl">
           <h3 className="text-[#C5A059] text-xs uppercase tracking-widest mb-4 font-bold">{t.contactPage.message.label}</h3>
-          <div className="space-y-6">
+          <form onSubmit={handleFormSubmit} className="space-y-6">
+            {/* Form error */}
+            {formErrors.form && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-red-500/10 border border-red-500 rounded text-red-500 text-sm"
+              >
+                {formErrors.form}
+              </motion.div>
+            )}
+
+            {/* Success message */}
+            {formState.status === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-green-500/10 border border-green-500 rounded text-green-500 text-sm font-bold"
+              >
+                {formState.message}
+              </motion.div>
+            )}
+
+            {/* Error message */}
+            {formState.status === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-red-500/10 border border-red-500 rounded text-red-500 text-sm"
+              >
+                {formState.message}
+              </motion.div>
+            )}
+
             <div>
               <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">
                 {contactType === 'travel' ? t.contactPage.message.nameLabel : t.contactPage.message.companyLabel}
               </label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleFormChange}
                 placeholder={contactType === 'travel' ? t.contactPage.message.namePlaceholder : t.contactPage.message.companyPlaceholder}
-                className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-[#C5A059] transition-colors placeholder-gray-600"
+                className={`w-full bg-transparent border-b py-4 outline-none transition-colors placeholder-gray-600 ${
+                  formErrors.name ? 'border-red-500 text-red-500' : 'border-white/10 focus:border-[#C5A059]'
+                }`}
               />
+              {formErrors.name && <p className="text-red-500 text-xs mt-2">{formErrors.name}</p>}
             </div>
+
             <div>
               <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">{t.contactPage.message.emailLabel}</label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleFormChange}
                 placeholder="your@email.com"
-                className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-[#C5A059] transition-colors placeholder-gray-600"
+                className={`w-full bg-transparent border-b py-4 outline-none transition-colors placeholder-gray-600 ${
+                  formErrors.email ? 'border-red-500 text-red-500' : 'border-white/10 focus:border-[#C5A059]'
+                }`}
               />
+              {formErrors.email && <p className="text-red-500 text-xs mt-2">{formErrors.email}</p>}
             </div>
+
             <div>
               <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block">{t.contactPage.message.messageLabel}</label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleFormChange}
                 placeholder={
                   contactType === 'travel'
                     ? t.contactPage.message.travelPlaceholder
                     : t.contactPage.message.businessPlaceholder
                 }
                 rows={6}
-                className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-[#C5A059] transition-colors placeholder-gray-600 resize-none"
+                className={`w-full bg-transparent border-b py-4 outline-none transition-colors placeholder-gray-600 resize-none ${
+                  formErrors.message ? 'border-red-500 text-red-500' : 'border-white/10 focus:border-[#C5A059]'
+                }`}
               />
+              {formErrors.message && <p className="text-red-500 text-xs mt-2">{formErrors.message}</p>}
             </div>
-            <button className="w-full py-6 bg-[#C5A059] text-black font-bold uppercase tracking-[0.4em] hover:bg-white transition-all">
-              {t.contactPage.message.button}
+
+            <button
+              type="submit"
+              disabled={formState.status === 'sending'}
+              className="w-full py-6 bg-[#C5A059] text-black font-bold uppercase tracking-[0.4em] hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+            >
+              {formState.status === 'sending' ? (
+                <>
+                  <Loader size={18} className="animate-spin" />
+                  Enviando...
+                </>
+              ) : (
+                t.contactPage.message.button
+              )}
             </button>
-          </div>
+          </form>
         </motion.div>
       </section>
 
