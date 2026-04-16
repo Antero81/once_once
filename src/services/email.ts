@@ -5,6 +5,7 @@ export interface SendEmailParams {
   from_email: string;
   message: string;
   contact_type: 'travel' | 'business';
+  recaptcha_token?: string;
 }
 
 export const sendContactEmail = async (params: SendEmailParams): Promise<void> => {
@@ -25,6 +26,7 @@ export const sendContactEmail = async (params: SendEmailParams): Promise<void> =
       from_email: params.from_email,
       message: params.message,
       contact_type: params.contact_type,
+      recaptcha_token: params.recaptcha_token,
     },
     publicKey
   );

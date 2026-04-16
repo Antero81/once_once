@@ -4,6 +4,7 @@ import { assets } from '@/assets';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { MessageCircle, Loader } from 'lucide-react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { getWhatsAppLink } from '@/config/contact';
 import { useLanguage } from '@/hooks/useLanguage';
 import { sendContactEmail } from '@/services/email';
@@ -17,6 +18,7 @@ interface FormState {
 
 export const ContactPage = () => {
   const { t } = useLanguage();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [contactType, setContactType] = useState<'travel' | 'business'>('travel');
   const [formData, setFormData] = useState({
     name: '',
@@ -63,11 +65,17 @@ export const ContactPage = () => {
     setFormState({ status: 'sending' });
 
     try {
+      let recaptchaToken: string | undefined;
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha('contact_form');
+      }
+
       await sendContactEmail({
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
         contact_type: contactType,
+        recaptcha_token: recaptchaToken,
       });
 
       setFormState({

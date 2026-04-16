@@ -102,6 +102,11 @@ export const ExperiencePage = () => {
         throw new Error('EmailJS configuration missing');
       }
 
+      let recaptchaToken: string | undefined;
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha('experience_form');
+      }
+
       await emailjs.send(
         serviceId,
         templateId,
@@ -111,6 +116,7 @@ export const ExperiencePage = () => {
           message: formData.message,
           experience: pageData.title,
           to_email: 'contacto@onceonce.com',
+          recaptcha_token: recaptchaToken,
         },
         publicKey
       );
